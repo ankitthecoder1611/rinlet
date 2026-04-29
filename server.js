@@ -15,10 +15,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-/**
- * MODULE: Port Scanner
- * Checks if critical ports (21, 22, 80, 443, 3306) are open
- */
 const checkPort = (port, host) => {
     return new Promise((resolve) => {
         const socket = new net.Socket();
@@ -30,10 +26,6 @@ const checkPort = (port, host) => {
     });
 };
 
-/**
- * MODULE: Directory Discovery
- * Checks for sensitive exposed paths
- */
 async function checkPath(baseUrl, path) {
     try {
         const res = await axios.get(`${baseUrl}/${path}`, { timeout: 2000, validateStatus: false });
@@ -55,17 +47,17 @@ async function performScan(target) {
 
         const headers = response.headers;
 
-        // 1. HTTPS Check
+        
         results.https = baseUrl.startsWith('https');
 
-        // 2. Security Headers
+        
         const securityHeaders = ['content-security-policy', 'x-frame-options', 'strict-transport-security'];
         results.headers = securityHeaders.some(h => headers[h]);
 
-        // 3. Tech Exposure
+        
         results.tech = !(headers['x-powered-by'] || (headers['server'] && headers['server'].length > 12));
 
-        // 4. Port Scan
+        
         const openPorts = [];
         const criticalPorts = [21, 22, 80, 443, 3306];
         for (const port of criticalPorts) {
@@ -74,7 +66,7 @@ async function performScan(target) {
         }
         results.ports = !openPorts.includes(3306) && !openPorts.includes(21);
 
-        // 5. Directory Discovery
+
         const hiddenPaths = ['.env', '.git/config', 'phpinfo.php', 'admin/'];
         let foundPaths = 0;
         for (const p of hiddenPaths) {
@@ -82,10 +74,9 @@ async function performScan(target) {
         }
         results.directories = foundPaths === 0;
 
-        // 6. Rate Limiting (Heuristic)
         results.rate = !!(headers['x-ratelimit-limit'] || headers['retry-after']);
 
-        // Mocked modules
+
         results.domain = true;
         results.injection = true;
         results.subdomains = true;
