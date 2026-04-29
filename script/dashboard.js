@@ -1,33 +1,25 @@
-/**
- * RINLET - High-End SOC Dashboard (Codespaces Optimized)
- * Handles dynamic environment detection and sequential audit visualization
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Configuration
+    
     const modules = [
         'https', 'headers', 'domain', 'injection', 'directories', 
         'subdomains', 'tech', 'sql', 'xss', 'auth', 'rate', 'ports'
     ];
 
-    // 2. Chart Instances
+    
     let safetyScoreChart, threatDistChart, auditChronologyChart;
     let safeCount = 0;
     let vulnCount = 0;
     
     const scannedTarget = localStorage.getItem('scannedTarget');
 
-    // 3. Environment Detection (CRITICAL FOR CODESPACES)
-    // Replace the URL below with your actual "Public" forwarded address from the Ports tab
-   // Replace the placeholder with your ACTUAL link from the Ports tab
+    
 const CODESPACE_URL = "https://bug-free-sniffle-5gprxxjprpq3w4x-3000.app.github.dev"; 
-// ^^^ It should look very similar to your frontend URL, but with -3000 instead of -5500
+
     const LOCAL_URL = "http://127.0.0.1:3000";
     
-    // Automatically switch between local and cloud URLs
+
     const API_BASE = window.location.hostname.includes('github.dev') ? CODESPACE_URL : LOCAL_URL;
 
-    // 4. Initialization
     if (scannedTarget) {
         document.getElementById('targetDisplay').innerText = scannedTarget;
         initializeCharts();
@@ -102,7 +94,6 @@ const CODESPACE_URL = "https://bug-free-sniffle-5gprxxjprpq3w4x-3000.app.github.
             
             const realData = await response.json();
 
-            // Sequence playback
             for (let i = 0; i < modules.length; i++) {
                 const modId = modules[i];
                 const element = document.getElementById(`mod-${modId}`);
@@ -140,7 +131,7 @@ const CODESPACE_URL = "https://bug-free-sniffle-5gprxxjprpq3w4x-3000.app.github.
             targetEl.innerText = "ERROR: BACKEND_UNREACHABLE";
             targetEl.style.color = "#f85149";
             
-            // Helpful hint for Codespaces users
+
             console.warn("HINT: Ensure your port 3000 is set to 'Public' in the Ports tab.");
         }
     }
@@ -149,15 +140,14 @@ const CODESPACE_URL = "https://bug-free-sniffle-5gprxxjprpq3w4x-3000.app.github.
         const total = modules.length;
         const currentSafety = Math.round((safeCount / step) * 100);
 
-        // Update Doughnut
+
         safetyScoreChart.data.datasets[0].data = [currentSafety, 100 - currentSafety];
         safetyScoreChart.update();
 
-        // Update Pie
+
         threatDistChart.data.datasets[0].data = [safeCount, vulnCount, total - step];
         threatDistChart.update();
 
-        // Update Line
         auditChronologyChart.data.labels.push(moduleName.toUpperCase());
         auditChronologyChart.data.datasets[0].data.push(currentSafety);
         auditChronologyChart.update();
