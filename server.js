@@ -2,21 +2,18 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const net = require('net');
+const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// NEW PERMISSIVE CORS CONFIGURATION
 app.use(cors({
-    origin: '*', // Allows all origins (Frontend URLs) to connect
+    origin: '*',
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-
-// ... rest of your code (performScan, app.post, etc.) ...
 app.use(express.json());
-
-// ... rest of your performScan and routes code ...
+app.use(express.static(path.join(__dirname)));
 
 /**
  * MODULE: Port Scanner
@@ -25,7 +22,7 @@ app.use(express.json());
 const checkPort = (port, host) => {
     return new Promise((resolve) => {
         const socket = new net.Socket();
-        socket.setTimeout(1500); // 1.5s timeout per port
+        socket.setTimeout(1500);
         socket.on('connect', () => { socket.destroy(); resolve(true); });
         socket.on('timeout', () => { socket.destroy(); resolve(false); });
         socket.on('error', () => { socket.destroy(); resolve(false); });
@@ -45,13 +42,12 @@ async function checkPath(baseUrl, path) {
 }
 
 async function performScan(target) {
-    // Sanitize target
     const host = target.replace(/^(https?:\/\/)/, '').replace(/\/$/, '');
     const baseUrl = target.startsWith('http') ? target : `https://${host}`;
     const results = {};
 
     try {
-        const response = await axios.get(baseUrl, { 
+        const response = await axios.get(baseUrl, {
             timeout: 5000,
             headers: { 'User-Agent': 'Rinlet-Security-Scanner/2.0' },
             validateStatus: false
@@ -62,15 +58,14 @@ async function performScan(target) {
         // 1. HTTPS Check
         results.https = baseUrl.startsWith('https');
 
-        // 2. Security Headers (Real)
+        // 2. Security Headers
         const securityHeaders = ['content-security-policy', 'x-frame-options', 'strict-transport-security'];
         results.headers = securityHeaders.some(h => headers[h]);
 
-        // 3. Tech Exposure (Real)
+        // 3. Tech Exposure
         results.tech = !(headers['x-powered-by'] || (headers['server'] && headers['server'].length > 12));
 
-        // 4. Ports Check (Real)
-        // We consider it "Safe" if common dangerous ports (21, 3306) are closed
+        // 4. Port Scan
         const openPorts = [];
         const criticalPorts = [21, 22, 80, 443, 3306];
         for (const port of criticalPorts) {
@@ -79,19 +74,18 @@ async function performScan(target) {
         }
         results.ports = !openPorts.includes(3306) && !openPorts.includes(21);
 
-        // 5. Directories (Real)
+        // 5. Directory Discovery
         const hiddenPaths = ['.env', '.git/config', 'phpinfo.php', 'admin/'];
         let foundPaths = 0;
-        for (const path of hiddenPaths) {
-            if (await checkPath(baseUrl, path)) foundPaths++;
+        for (const p of hiddenPaths) {
+            if (await checkPath(baseUrl, p)) foundPaths++;
         }
         results.directories = foundPaths === 0;
 
         // 6. Rate Limiting (Heuristic)
-        // If the server doesn't provide a 'retry-after' or 'x-ratelimit' header, we flag it
         results.rate = !!(headers['x-ratelimit-limit'] || headers['retry-after']);
 
-        // Mocking the remaining complex ones for the dashboard UI
+        // Mocked modules
         results.domain = true;
         results.injection = true;
         results.subdomains = true;
@@ -103,7 +97,6 @@ async function performScan(target) {
 
     } catch (error) {
         console.error(`Scan Error: ${error.message}`);
-        // Return false for everything if site is totally down
         return { error: "Target unreachable", status: "OFFLINE" };
     }
 }
@@ -111,7 +104,7 @@ async function performScan(target) {
 app.post('/api/scan', async (req, res) => {
     const { target } = req.body;
     if (!target) return res.status(400).json({ error: "No target provided" });
-    
+
     console.log(`[!] AUDIT_START: ${target}`);
     const scanData = await performScan(target);
     console.log(`[+] AUDIT_COMPLETE: ${target}`);
