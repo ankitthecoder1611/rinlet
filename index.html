@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RINLET | Cyber Vulnerability Scanner</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="cyberBg"></canvas>
+
+    <div class="main-wrapper">
+        <nav>
+            <div class="logo">
+                <span class="prompt">$</span> RINLET<span class="cursor">_</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="docs.html">Documentation</a></li>
+               
+            </ul>
+        </nav>
+
+        <main class="content">
+            <header class="hero">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="control red"></span>
+                        <span class="control yellow"></span>
+                        <span class="control green"></span>
+                        <span class="title">rinlet-scanner --v1.0</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="cmd-line"><span class="prompt">rinlet@pwn:~$</span> run-audit --help</p>
+                        <p class="output-line">Rinlet v1.0. Audit websites for critical vulnerabilities (SQLi, XSS, SSRF).</p>
+                        <p class="cmd-line"><span class="prompt">rinlet@pwn:~$</span> specify-target --url</p>
+                        
+                        <div class="input-area">
+                            <span class="prompt">_</span>
+                            <input type="text" id="targetUrl" placeholder="https://api.target.com" autofocus>
+                            <button id="scanBtn">EXECUTE</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

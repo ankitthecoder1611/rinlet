@@ -1,0 +1,303 @@
+.dash-page {
+    background-color: var(--bg-deep);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #0d1117;
+    border-bottom: 1px solid #30363d;
+}
+
+.btn-exit {
+    color: var(--danger);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    border: 1px solid var(--danger);
+    padding: 5px 15px;
+    font-size: 0.8rem;
+}
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar Stats */
+.dash-sidebar {
+    background: rgba(13, 17, 23, 0.5);
+    border-right: 1px solid #30363d;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat-card {
+    background: #161b22;
+    padding: 20px;
+    border-radius: 4px;
+    border-left: 3px solid var(--cyber-blue);
+}
+
+.stat-card label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.stat-card .value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: var(--font-mono);
+}
+
+.value.danger { color: var(--danger); text-shadow: 0 0 10px rgba(248, 81, 73, 0.3); }
+
+/* Main Content Area */
+.dash-main {
+    padding: 40px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.chart-container, .table-container {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+h3 {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    color: var(--text-muted);
+}
+
+/* Mock Chart Bars */
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.bar-row .label { width: 50px; font-size: 0.8rem; }
+
+.bar {
+    height: 12px;
+    border-radius: 6px;
+}
+
+.bar.red { background: var(--danger); }
+.bar.orange { background: #ffbd2e; }
+.bar.yellow { background: #f2e05d; }
+
+/* Vulnerability Table */
+.vuln-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.vuln-table th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #30363d;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.vuln-table td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #161b22;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+}
+
+.sev-high { color: var(--danger); }
+.sev-med { color: #ffbd2e; }
+
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns of 4 rows */
+    gap: 15px;
+}
+
+.mod-item {
+    background: #161b22;
+    padding: 20px;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.mod-name { color: var(--text-main); }
+
+.mod-status {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background: #0d1117;
+    color: var(--text-muted);
+}
+
+/* Status Colors */
+.status-safe { color: var(--cyber-green); border: 1px solid var(--cyber-green); }
+.status-vuln { color: var(--danger); border: 1px solid var(--danger); }
+.status-scanning { color: var(--cyber-blue); border: 1px solid var(--cyber-blue); animation: blink 1s infinite; }
+
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns of 4 rows */
+    gap: 15px;
+}
+
+.mod-item {
+    background: #161b22;
+    padding: 20px;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.mod-name { color: var(--text-main); }
+
+.mod-status {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background: #0d1117;
+    color: var(--text-muted);
+}
+
+/* Status Colors */
+.status-safe { color: var(--cyber-green); border: 1px solid var(--cyber-green); }
+.status-vuln { color: var(--danger); border: 1px solid var(--danger); }
+.status-scanning { color: var(--cyber-blue); border: 1px solid var(--cyber-blue); animation: blink 1s infinite; }
+
+
+.dash-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.viz-row {
+    display: flex;
+    gap: 20px;
+    height: 300px; /* Adjust height for the top charts */
+}
+
+.chart-container {
+    flex: 1;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.line-chart-wide {
+    flex: 2; /* Makes the line chart wider than the circular ones */
+}
+
+.canvas-wrapper {
+    flex: 1;
+    position: relative;
+    min-height: 0; /* Important for Chart.js responsiveness */
+}
+
+.chart-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Keeps 3 per row */
+    gap: 15px;
+    padding-bottom: 20px; /* Gives some breathing room at the bottom */
+}
+
+.mod-item {
+    min-height: 60px; /* Ensures a consistent height */
+    /* ... your other styles ... */
+}
+
+
+/* Update the main page container */
+.dash-page {
+    background-color: var(--bg-deep);
+    min-height: 100vh; /* Changed from height to min-height */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable vertical scrolling for the whole page */
+}
+
+/* Update the main grid container */
+.dash-grid {
+    display: flex; /* If using flex */
+    /* OR if you are using grid: */
+    /* display: grid; */
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+    /* Remove height: 100vh or height: calc(...) if present */
+}
+
+/* Ensure the modules section can grow */
+.dash-main {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 20px;
+    /* Ensure this doesn't have a fixed height */
+}
+
+/* The actual grid of 12 items */
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+.nav-doc:hover {
+    color: var(--cyber-blue) !important;
+    border-bottom: 1px solid var(--cyber-blue) !important;
+    text-shadow: 0 0 8px var(--cyber-blue);
+}

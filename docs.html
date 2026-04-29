@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Manual | RINLET Intelligence</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="docs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="doc-body">
+    <nav class="dash-nav" style="position: fixed; top: 0; width: 100%; z-index: 100;">
+        <div class="logo"><span class="prompt">$</span> RINLET<span class="cursor">_</span></div>
+        <a href="dashboard.html" class="btn-exit">RETURN_TO_SOC</a>
+    </nav>
+
+    <main class="doc-container">
+        <section class="doc-section">
+            <h2 class="doc-header">> PROJECT_MISSION_STATEMENT</h2>
+            <div class="detail-box" style="border-left: 2px solid var(--cyber-green);">
+                <p><strong>OUR MOTIVE:</strong> In an era of escalating cyber warfare, the gap between vulnerability and exploitation is narrowing. <strong>RINLET</strong> was engineered to empower security analysts with "First-Strike Reconnaissance" capabilities. Our goal is to provide a transparent, real-time diagnostic layer that identifies critical failure points before malicious actors can weaponize them.</p>
+                <p><em>"Security is not a product, but a process. RINLET makes that process visible."</em></p>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h3 style="color: var(--cyber-green);">> AUDIT_MATRIX_v2.1 (IMPACT_ASSESSMENT)</h3>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>MODULE</th>
+                        <th>FUNCTIONAL ANALYSIS (WHAT IT MEANS)</th>
+                        <th>POTENTIAL LOSS (RISK FACTOR)</th>
+                        <th>AUDIT METHODOLOGY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>01</td><td>HTTPS</td><td>Validates end-to-end data encryption.</td><td><strong>Data Theft:</strong> Exposure of passwords/PII.</td><td>SSL Handshake & Cert Chain.</td></tr>
+                    <tr><td>02</td><td>HEADERS</td><td>Audits browser-level security policies.</td><td><strong>Session Hijacking:</strong> High XSS/Clickjacking risk.</td><td>Policy String Parsing.</td></tr>
+                    <tr><td>03</td><td>DOMAIN</td><td>Verifies DNS and record reputation.</td><td><strong>Phishing:</strong> Unauthorized brand impersonation.</td><td>SPF/DKIM/DMARC Audit.</td></tr>
+                    <tr><td>04</td><td>INJECTION</td><td>Tests field sanitization integrity.</td><td><strong>System Takeover:</strong> Remote code execution.</td><td>Payload Reflection Analysis.</td></tr>
+                    <tr><td>05</td><td>DIRECTORIES</td><td>Probes for exposed administrative paths.</td><td><strong>Intellectual Property:</strong> Source code leakage.</td><td>HTTP 200/403 Fuzzing.</td></tr>
+                    <tr><td>06</td><td>SUBDOMAINS</td><td>Identifies abandoned development hosts.</td><td><strong>Backdoor Entry:</strong> Staging environment breach.</td><td>DNS Host Enumeration.</td></tr>
+                    <tr><td>07</td><td>TECH_STACK</td><td>Checks for server version disclosure.</td><td><strong>Targeted Exploit:</strong> CVE-specific targeting.</td><td>Banner Fingerprinting.</td></tr>
+                    <tr><td>08</td><td>SQL_INJ</td><td>Tests database query escape logic.</td><td><strong>Total Data Breach:</strong> Database exfiltration.</td><td>Error-Based Heuristics.</td></tr>
+                    <tr><td>09</td><td>XSS_VULN</td><td>Checks for client-side script reflection.</td><td><strong>Identity Theft:</strong> Admin cookie hijacking.</td><td>Reflected DOM Probing.</td></tr>
+                    <tr><td>10</td><td>AUTH_BYPASS</td><td>Audits session management security.</td><td><strong>Privilege Escalation:</strong> Account takeover.</td><td>Cookie Attribute Audit.</td></tr>
+                    <tr><td>11</td><td>RATE_LIMIT</td><td>Tests brute-force resilience.</td><td><strong>Service Downtime:</strong> DoS/DDoS vulnerability.</td><td>429 Status Threshold.</td></tr>
+                    <tr><td>12</td><td>PORT_SCAN</td><td>Maps the public network perimeter.</td><td><strong>Network Breach:</strong> Database/SSH exposure.</td><td>TCP Socket Handshake.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h3 style="color: var(--cyber-green);">> ADVANCED_SYSTEM_LOGIC</h3>
+            
+            <div class="detail-box">
+                <h4>THE ASYNC RECON ENGINE</h4>
+                <p>Unlike traditional sequential scanners, RINLET utilizes <strong>Parallel Asynchronous Probing</strong>. By leveraging Node.js event loops, we initiate 12 simultaneous audit threads, reducing recon time by 85% compared to standard Python-based scanners.</p>
+            </div>
+
+            <div class="detail-box">
+                <h4>HEURISTIC VULNERABILITY DETECTION</h4>
+                <p>The engine doesn't just look for "Yes/No" answers. It analyzes server response timings and error strings to deduce the presence of WAFs (Web Application Firewalls) and load balancers, providing a deeper map of the target's infrastructure.</p>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h3 style="color: var(--cyber-green);">> ARCHITECTURE_&_PROTOCOLS</h3>
+            <div class="code-block">
+                // SYSTEM_INTEGRITY_FLOW
+                1. [SOC_DASHBOARD] --> Sends Target Packet
+                2. [SEC_ENGINE]    --> Sanity Check & Normalization
+                3. [PROBE_LAYER]   --> Multi-Protocol Dispatch (HTTP/TCP/DNS)
+                4. [DATA_PARSER]   --> Severity Scoring & JSON Encoding
+                5. [RENDER_BUS]    --> Real-Time Chart.js Telemetry Update
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <div class="legal-warning">
+                [!] LEGAL_WARNING: RINLET is a high-precision reconnaissance tool. Unauthorized use against foreign infrastructure is strictly prohibited. The developers assume no liability for misuse. Use for ethical defense only.
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #30363d; font-family: 'Fira Code'; font-size: 0.7rem; margin-bottom: 40px;">
+            RUNNING ON RINLET_SEC_CORE v2.0 | IILM UNIVERSITY SCSE COMPLIANT
+        </p>
+    </footer>
+
+    <script>
+        console.log("RINLET_KNOWLEDGE_BASE: System Ready.");
+    </script>
+</body>
+</html>

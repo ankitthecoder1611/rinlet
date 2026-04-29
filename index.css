@@ -1,0 +1,233 @@
+/* --- Core Variables & Reset --- */
+:root {
+    --bg-deep: #050509; /* Deep space, almost black */
+    --bg-card: #0d1117; /* Dark gray for the terminal window */
+    --cyber-green: #00ff41; /* Classic Matrix/Hacker Green */
+    --cyber-blue: #00f2fe; /* Alternate sharp blue accent */
+    --text-main: #e6edf3;
+    --text-muted: #8b949e;
+    
+    /* Font Choices */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    overflow: hidden; /* Prevents scrollbars interfering with BG animation */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- The Animated Background (Canvas) --- */
+#cyberBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Layers the background BEHIND the content */
+    opacity: 0.3; /* Subtle animation, not distracting */
+}
+
+/* --- Layout Wrapper (Layers content over canvas) --- */
+.main-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: rgba(13, 17, 23, 0.9);
+    border-bottom: 1px solid #30363d;
+    backdrop-filter: blur(5px); /* Frosty glass effect */
+}
+
+.logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--cyber-green);
+    letter-spacing: -1px;
+}
+
+.logo .prompt {
+    color: var(--text-muted);
+}
+
+/* Simple cursor blink animation */
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--cyber-green);
+}
+
+.btn-api {
+    font-family: var(--font-mono);
+    border: 1px solid var(--cyber-green);
+    padding: 8px 18px;
+    border-radius: 4px;
+    color: var(--cyber-green) !important;
+    text-shadow: 0 0 5px var(--cyber-green);
+}
+
+.btn-api:hover {
+    background-color: rgba(0, 255, 65, 0.1);
+}
+
+/* --- Main Content / Hero --- */
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* --- The Terminal Window --- */
+.terminal-window {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                0 0 15px rgba(0, 242, 254, 0.1); /* Subtle blue glow */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-header {
+    background-color: #161b22;
+    padding: 10px 15px;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* macOS style window controls */
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.terminal-header .title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-right: 40px; /* Balances the controls */
+}
+
+/* --- Terminal Body --- */
+.terminal-body {
+    padding: 25px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--cyber-green);
+    text-shadow: 0 0 2px rgba(0, 255, 65, 0.7);
+    overflow-y: auto; /* Scrollable body */
+    flex: 1;
+}
+
+.cmd-line {
+    color: var(--text-main);
+    margin-bottom: 5px;
+}
+
+.prompt {
+    color: var(--cyber-blue);
+}
+
+.output-line {
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* --- Input Area --- */
+.input-area {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #30363d;
+    padding-top: 15px;
+}
+
+.input-area input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--cyber-blue);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    padding: 5px 10px;
+}
+
+.input-area input::placeholder {
+    color: rgba(0, 242, 254, 0.3);
+}
+
+.input-area button {
+    font-family: var(--font-mono);
+    background-color: transparent;
+    border: 1px solid var(--cyber-blue);
+    color: var(--cyber-blue);
+    padding: 8px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px var(--cyber-blue);
+}
+
+.input-area button:hover {
+    background-color: var(--cyber-blue);
+    color: var(--bg-deep);
+    box-shadow: 0 0 15px var(--cyber-blue);
+}

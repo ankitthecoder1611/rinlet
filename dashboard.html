@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Dashboard | RINLET</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-nav">
+        <div class="logo">
+            <span class="prompt">$</span> RINLET<span class="cursor">_</span>
+        </div>
+        <div class="target-info">
+            <span class="label">TARGET:</span>
+            <span id="targetDisplay" class="cyber-blue">detecting_target...</span>
+        </div>
+        <a href="index.html" class="btn-exit">TERMINATE_SESSION</a>
+    </nav>
+
+    <main class="dash-container">
+        
+        <section class="viz-row">
+            <div class="dash-card chart-container">
+                <label class="chart-label">OVERALL_SAFETY_INDEX</label>
+                <div class="canvas-wrapper">
+                    <canvas id="safetyScoreChart"></canvas>
+                </div>
+            </div>
+
+            <div class="dash-card chart-container">
+                <label class="chart-label">THREAT_DISTRIBUTION</label>
+                <div class="canvas-wrapper">
+                    <canvas id="threatDistChart"></canvas>
+                </div>
+            </div>
+
+            <div class="dash-card chart-container line-chart-wide">
+                <label class="chart-label">AUDIT_CHRONOLOGY</label>
+                <div class="canvas-wrapper">
+                    <canvas id="auditLineChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="status-section">
+            <header class="section-header">
+                <h3><span class="prompt">></span> SECURITY_MODULE_STATUS</h3>
+                <div class="threat-indicator">
+                    STATUS: <span id="threatLevel">INITIALIZING</span>
+                </div>
+            </header>
+
+            <div class="modules-grid">
+                <div class="mod-item" id="mod-https"><span class="mod-name">HTTPS</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-headers"><span class="mod-name">HEADERS</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-domain"><span class="mod-name">DOMAIN</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-injection"><span class="mod-name">INJECTION</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-directories"><span class="mod-name">DIRECTORIES</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-subdomains"><span class="mod-name">SUBDOMAINS</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-tech"><span class="mod-name">TECH_STACK</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-sql"><span class="mod-name">SQL_INJ</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-xss"><span class="mod-name">XSS_VULN</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-auth"><span class="mod-name">AUTH_BYPASS</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-rate"><span class="mod-name">RATE_LIMIT</span><span class="mod-status">WAITING</span></div>
+                <div class="mod-item" id="mod-ports"><span class="mod-name">PORT_SCAN</span><span class="mod-status">WAITING</span></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
